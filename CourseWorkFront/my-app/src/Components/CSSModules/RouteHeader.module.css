@@ -1,0 +1,30 @@
+.routeHeader {
+    background-color: #d3d3d3;
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumbs {
+    display: flex;
+    gap: 8px;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+.link {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.2s;
+}
+
+.link:hover {
+    color: #333;
+}
+
+.separator {
+    color: #333;
+}

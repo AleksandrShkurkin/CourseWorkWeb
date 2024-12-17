@@ -1,0 +1,53 @@
+import './App.css';
+import RegistrationForm from './Components/Authorization/Registration';
+import LoginForm from './Components/Authorization/Login';
+import Header from './Components/ConstantComponents/Header';
+import Footer from './Components/ConstantComponents/Footer';
+import React, {useState, createContext, useContext} from 'react';
+import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route, Link } from 'react-router-dom';
+
+export const UserContext = createContext();
+
+function App() {
+  const [id, setId] = useState(null);
+
+  const handleLogout = () => {
+    setId(null);
+  };
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        <Route
+          path="/"
+          element={
+            !id ? (
+              <div className="auth-screen">
+                <RegistrationForm setId={setId} />
+                <LoginForm setId={setId} />
+              </div>
+            ) : (
+              <Home />
+            )
+          }
+        />
+        <Route path="/home" element={<Home />} />
+        <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+      </>
+    )
+  );
+
+  return (
+    <UserContext.Provider value={{ id, setId }}>
+      <div className="app">
+        {id && <Header onLogout={handleLogout} cartCount={cartItems.length} />}
+        <main>
+          <RouterProvider router={router} />
+        </main>
+        {id && <Footer />}
+      </div>
+    </UserContext.Provider>
+  );
+}
+
+export default App;
